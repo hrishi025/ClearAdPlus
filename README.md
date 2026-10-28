@@ -1,13 +1,25 @@
 # <img src="icons/logo.svg" alt="Clear Ad Plus" width="40" height="40"> Clear Ad Plus
 
 [![Chrome Web Store](https://img.shields.io/badge/Chrome-Extension-green?logo=google-chrome&logoColor=white)](https://chrome.google.com/webstore)
-[![Version](https://img.shields.io/badge/version-0.1.0-blue.svg)](https://github.com/hrishi025/ClearAdPlus/releases)
+[![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/hrishi025/ClearAdPlus/releases)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/hrishi025/ClearAdPlus/pulls)
 [![Stars](https://img.shields.io/github/stars/hrishi025/ClearAdPlus?style=social)](https://github.com/hrishi025/ClearAdPlus/stargazers)
 [![Forks](https://img.shields.io/github/forks/hrishi025/ClearAdPlus?style=social)](https://github.com/hrishi025/ClearAdPlus/network/members)
 
 > A powerful, lightweight, and privacy-focused ad blocker for Chrome with support for YouTube, JioHotstar, and Amazon Prime Video.
+
+## 🎯 Supported Platforms
+
+<div align="center">
+  <img src="icons/youtube-logo.webp" alt="YouTube" width="60" height="60" style="margin: 0 20px;">
+  <img src="icons/hotstar-logo.jpg" alt="Hotstar" width="60" height="60" style="margin: 0 20px;">
+  <img src="icons/prime-logo.webp" alt="Prime Video" width="60" height="60" style="margin: 0 20px;">
+</div>
+
+<div align="center">
+  <sub>Currently supported • More platforms coming soon</sub>
+</div>
 
 ## ⭐ Star us on GitHub — it helps!
 
@@ -33,11 +45,14 @@ If you find this project helpful, consider buying me a coffee to support continu
 - **Amazon Prime Video**: 8x speed fast-forward, auto-mute, skip button auto-click
 
 ### 🎨 Modern UI
-- **Clean Design**: Red-themed interface with Montserrat typography
-- **Statistics**: Real-time blocked request counts
+- **Clean Design**: Professional red-themed interface with Montserrat typography
+- **Platform Logos**: Visual branding for YouTube, Hotstar, and Prime Video
+- **Statistics**: Real-time blocked request counts with animated counters
 - **Badge**: Shows blocked count on toolbar icon
 - **Toggle Controls**: Enable/disable features per platform
-- **Refresh Button**: Quick page reload for changes to take effect
+- **Dynamic Refresh**: Instant refresh buttons appear when settings change
+- **Supported Platforms Section**: Shows all supported streaming platforms
+- **Social Links**: GitHub star, Buy me a coffee, and feedback buttons
 
 ### 🔒 Privacy & Performance
 - **Zero Telemetry**: No data collection or analytics
@@ -52,10 +67,17 @@ If you find this project helpful, consider buying me a coffee to support continu
 
 ## 🚀 Installation
 
-### From Chrome Web Store
-1. Visit the [Chrome Web Store](https://chrome.google.com/webstore)
-2. Click "Add to Chrome"
-3. Follow the installation prompts
+> ⚠️ **Important**: This extension is not yet published on the Chrome Web Store. To avoid Chrome's warning about non-Web Store extensions, please use the ZIP file installation method below.
+
+### From GitHub ZIP (Recommended)
+1. Go to the [GitHub repository](https://github.com/hrishi025/ClearAdPlus)
+2. Click the green **Code** button and select **Download ZIP**
+3. Extract the downloaded ZIP file
+4. Open Chrome and navigate to `chrome://extensions/`
+5. Enable **Developer mode** (top-right toggle)
+6. Click **Load unpacked** (top-left)
+7. Select the extracted `clearblock` folder
+8. The extension is now loaded!
 
 ### From Source (Developer Mode)
 1. Clone this repository:
@@ -76,14 +98,10 @@ If you find this project helpful, consider buying me a coffee to support continu
 - **Statistics**: View blocked request counts in the popup
 
 ### Platform-Specific Features
-- **YouTube**: Ads are automatically skipped
-- **JioHotstar**: Toggle "JioHotstar ad skipping" in popup
-- **Prime Video**: Toggle "Prime Video ad skipping" in popup
-
-### Filter Management
-- **Custom Subscriptions**: Add custom filter list URLs
-- **Automatic Updates**: Filter lists update every 24 hours
-- **Manual Update**: Click "Update list" in settings
+- **YouTube**: Ads are automatically skipped (always enabled)
+- **JioHotstar**: Toggle "JioHotstar ad skipping" in popup (default: enabled)
+- **Prime Video**: Toggle "Prime Video ad skipping" in popup (default: enabled)
+- **Platform Logos**: Visual indicators for supported platforms in popup
 
 ## 🛠️ Development
 
@@ -123,15 +141,17 @@ clearblock/
 
 ### Manual Testing Checklist
 - [ ] Extension loads without errors
-- [ ] Popup opens correctly
+- [ ] Popup opens correctly with proper logo
 - [ ] Global blocking toggle works
 - [ ] Per-site allowlist works
 - [ ] YouTube ad skipping works
 - [ ] JioHotstar ad skipping works
 - [ ] Prime Video ad skipping works
-- [ ] Statistics display correctly
-- [ ] Filter updates work
+- [ ] Platform logos display correctly
+- [ ] Dynamic refresh buttons appear on toggle
+- [ ] Statistics display correctly with animation
 - [ ] Settings persist across browser restarts
+- [ ] Social links work (GitHub, Buy me a coffee, Feedback)
 
 ### Automated Tests
 ```bash
