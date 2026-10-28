@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Clear Ad Plus",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "An independent ad blocker with powerful filtering.",
   "permissions": ["alarms", "declarativeNetRequest", "storage", "tabs"],
   "host_permissions": ["<all_urls>"],

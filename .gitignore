@@ -50,3 +50,7 @@ coverage/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Extension keys (keep private)
+*.pem
+key.pem

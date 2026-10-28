@@ -13,11 +13,11 @@
     <header>
       <div class="logo-container">
         <div class="logo-icon">
-          <img src="../../icons/logo.png" alt="Clear Ad Plus Logo" />
+          <img src="../../icons/logo.svg" alt="Clear Ad Plus Logo" />
         </div>
         <div class="logo-text">
           <h1><span class="name-light">ClearAd</span><span class="name-bold">Plus</span></h1>
-          <span class="version">v0.1.0</span>
+          <span class="version">v1.0.0</span>
         </div>
       </div>
       <div id="health" class="health-indicator" title="Extension status"></div>
@@ -58,10 +58,18 @@
           <strong>Global blocking</strong>
           <span class="control-subtext">Enable extension-wide blocking</span>
         </div>
-        <label class="toggle-switch">
-          <input id="global" type="checkbox">
-          <span class="toggle-slider"></span>
-        </label>
+        <div class="control-actions">
+          <label class="toggle-switch">
+            <input id="global" type="checkbox">
+            <span class="toggle-slider"></span>
+          </label>
+          <button class="refresh-btn-mini hidden" data-setting="global">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M23 4v6h-6M1 20v-6h6"/>
+              <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
+            </svg>
+          </button>
+        </div>
       </div>
       
       <div class="control-item">
@@ -69,10 +77,18 @@
           <strong>Skip ad blocking for this website</strong>
           <span id="site" class="control-subtext">Loading...</span>
         </div>
-        <label class="toggle-switch">
-          <input id="allowlist" type="checkbox" disabled aria-label="Allow this site">
-          <span class="toggle-slider"></span>
-        </label>
+        <div class="control-actions">
+          <label class="toggle-switch">
+            <input id="allowlist" type="checkbox" disabled aria-label="Allow this site">
+            <span class="toggle-slider"></span>
+          </label>
+          <button class="refresh-btn-mini hidden" data-setting="allowlist">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M23 4v6h-6M1 20v-6h6"/>
+              <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
+            </svg>
+          </button>
+        </div>
       </div>
       
       <div class="control-item">
@@ -80,10 +96,18 @@
           <strong>JioHotstar ad skipping</strong>
           <span class="control-subtext">Auto-skip ads on Hotstar/JioCinema</span>
         </div>
-        <label class="toggle-switch">
-          <input id="hotstar-skipper" type="checkbox" aria-label="Enable Hotstar ad skipping">
-          <span class="toggle-slider"></span>
-        </label>
+        <div class="control-actions">
+          <label class="toggle-switch">
+            <input id="hotstar-skipper" type="checkbox" aria-label="Enable Hotstar ad skipping">
+            <span class="toggle-slider"></span>
+          </label>
+          <button class="refresh-btn-mini hidden" data-setting="hotstar">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M23 4v6h-6M1 20v-6h6"/>
+              <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
+            </svg>
+          </button>
+        </div>
       </div>
       
       <div class="control-item">
@@ -91,40 +115,39 @@
           <strong>Prime Video ad skipping</strong>
           <span class="control-subtext">Auto-skip ads on Amazon Prime Video</span>
         </div>
-        <label class="toggle-switch">
-          <input id="prime-skipper" type="checkbox" aria-label="Enable Prime Video ad skipping">
-          <span class="toggle-slider"></span>
-        </label>
+        <div class="control-actions">
+          <label class="toggle-switch">
+            <input id="prime-skipper" type="checkbox" aria-label="Enable Prime Video ad skipping">
+            <span class="toggle-slider"></span>
+          </label>
+          <button class="refresh-btn-mini hidden" data-setting="prime">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M23 4v6h-6M1 20v-6h6"/>
+              <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
+            </svg>
+          </button>
+        </div>
       </div>
     </section>
 
-    <section id="refresh-section" class="refresh-section">
-      <p class="section-label">REFRESH THIS PAGE</p>
-      <p class="refresh-text">Click the button below for changes to take effect.</p>
-      <button id="refresh-page" class="btn btn-secondary">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M23 4v6h-6M1 20v-6h6"/>
-          <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
-        </svg>
-        Refresh
-      </button>
-    </section>
-
-    <details class="settings-dropdown">
-      <summary>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <circle cx="12" cy="12" r="3"/>
-          <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
-        </svg>
-        Subscription settings
-      </summary>
-      <div class="settings-content">
-        <label for="subscription">Subscription URL</label>
-        <input id="subscription" type="url" aria-label="Subscription URL" placeholder="https://example.com/filters.txt">
-        <button id="update" class="btn btn-secondary">Update list</button>
-        <p id="details" class="muted-text"></p>
+    <section class="platforms-section">
+      <p class="section-label">SUPPORTED PLATFORMS</p>
+      <div class="platforms-grid">
+        <div class="platform-item">
+          <img src="../../icons/youtube-logo.webp" class="platform-brand-logo" alt="YouTube" />
+          <span>YouTube</span>
+        </div>
+        <div class="platform-item">
+          <img src="../../icons/hotstar-logo.jpg" class="platform-brand-logo" alt="Hotstar" />
+          <span>Hotstar</span>
+        </div>
+        <div class="platform-item">
+          <img src="../../icons/prime-logo.webp" class="platform-brand-logo" alt="Prime Video" />
+          <span>Prime Video</span>
+        </div>
       </div>
-    </details>
+      <p class="platforms-more">+ More coming soon</p>
+    </section>
 
     <footer>
       <div class="footer-content">
@@ -133,6 +156,29 @@
           <path d="M12 16v-4M12 8h.01"/>
         </svg>
         <span>Statistics are based on installed rules. Per-page counts track actual blocked requests in this session.</span>
+      </div>
+      
+      <div class="footer-social">
+        <a href="https://github.com/hrishi025/ClearAdPlus" target="_blank" class="social-link" title="Star on GitHub">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.916-4.103-7.916 4.103 1.48-8.279-6.064-5.828 8.332-1.151z"/>
+          </svg>
+        </a>
+        <a href="https://buymeacoffee.com/hrishi025" target="_blank" class="social-link" title="Buy me a coffee">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M18.5 3H6c-1.1 0-2 .9-2 2v5.71c0 3.83 2.95 7.18 6.78 7.29 3.5.09 5.09 3.16 5.09 3.16S15.3 19.09 18.5 3z"/>
+            <path d="M18.5 3c.83 0 1.5.67 1.5 1.5v5.71c0 3.83-2.95 7.18-6.78 7.29-3.5.09-5.09 3.16-5.09 3.16S8.7 19.09 5.5 3c-.83 0-1.5-.67-1.5-1.5V5.5c0-3.83 2.95-7.18 6.78-7.29C14.3 2.12 18.5 3 18.5 3z"/>
+          </svg>
+        </a>
+        <a href="https://github.com/hrishi025/ClearAdPlus/issues" target="_blank" class="social-link" title="Report an issue">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.1a8.48 8.48 0 0 1 8 8v.1z"/>
+          </svg>
+        </a>
+      </div>
+      
+      <div class="footer-attribution">
+        Built with ❤️ by <a href="https://github.com/hrishi025" target="_blank">@hrishi025</a>
       </div>
     </footer>
   </main>

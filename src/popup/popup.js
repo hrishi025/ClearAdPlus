@@ -48,16 +48,8 @@ function updateHealthIndicator(settings) {
 
 async function showStatus(settings) {
   $("global").checked = settings.globalEnabled;
-  $("subscription").value = settings.subscriptionUrl;
   
   updateHealthIndicator(settings);
-  
-  const detailsText = `${settings.unsupportedFilterCount.toLocaleString()} unsupported/ignored filters.`;
-  if (settings.partialImport) {
-    $("details").textContent = detailsText + " Import was limited by Chrome's dynamic-rule capacity.";
-  } else {
-    $("details").textContent = detailsText;
-  }
   
   if (currentDomain) {
     $("allowlist").checked = settings.allowlistedDomains.includes(currentDomain);
@@ -109,10 +101,32 @@ async function showStatus(settings) {
   }
 }
 
+function showRefreshButton(settingId) {
+  const refreshBtn = document.querySelector(`.refresh-btn-mini[data-setting="${settingId}"]`);
+  if (refreshBtn) {
+    refreshBtn.classList.remove('hidden');
+    setTimeout(() => {
+      refreshBtn.classList.add('visible');
+    }, 10);
+  }
+}
+
+function hideAllRefreshButtons() {
+  const buttons = document.querySelectorAll('.refresh-btn-mini');
+  buttons.forEach(btn => {
+    btn.classList.remove('visible');
+    btn.classList.add('hidden');
+  });
+}
+
 async function init() {
   const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
   try {
-    currentDomain = new URL(tab.url).hostname.toLowerCase().replace(/^www\./, "");
+    if (tab && tab.url) {
+      currentDomain = new URL(tab.url).hostname.toLowerCase().replace(/^www\./, "");
+    } else {
+      currentDomain = null;
+    }
   } catch {
     currentDomain = null;
   }
@@ -120,15 +134,8 @@ async function init() {
   $("site").textContent = currentDomain ? `Site: ${currentDomain}` : "This page cannot be allowlisted.";
   $("allowlist").disabled = !currentDomain;
   
-  // Hide refresh section if on non-HTTP page
-  const refreshSection = $("refresh-section");
-  if (refreshSection) {
-    if (tab && (tab.url.startsWith('http://') || tab.url.startsWith('https://'))) {
-      refreshSection.hidden = false;
-    } else {
-      refreshSection.hidden = true;
-    }
-  }
+  // Hide all refresh buttons on init
+  hideAllRefreshButtons();
   
   try {
     showStatus(await send({ type: "status.get" }));
@@ -138,6 +145,7 @@ async function init() {
 }
 
 $("global").addEventListener("change", async (event) => {
+  showRefreshButton('global');
   try {
     showStatus(await send({ type: "settings.globalEnabled", enabled: event.target.checked }));
   } catch (error) {
@@ -146,6 +154,7 @@ $("global").addEventListener("change", async (event) => {
 });
 
 $("allowlist").addEventListener("change", async (event) => {
+  showRefreshButton('allowlist');
   try {
     showStatus(await send({ type: "allowlist.set", domain: currentDomain, allowlisted: event.target.checked }));
   } catch (error) {
@@ -154,6 +163,7 @@ $("allowlist").addEventListener("change", async (event) => {
 });
 
 $("hotstar-skipper").addEventListener("change", async (event) => {
+  showRefreshButton('hotstar');
   try {
     chrome.storage.local.set({ hotstarAdBlockEnabled: event.target.checked });
   } catch (error) {
@@ -162,6 +172,7 @@ $("hotstar-skipper").addEventListener("change", async (event) => {
 });
 
 $("prime-skipper").addEventListener("change", async (event) => {
+  showRefreshButton('prime');
   try {
     chrome.storage.local.set({ primeAdBlockEnabled: event.target.checked });
   } catch (error) {
@@ -169,26 +180,19 @@ $("prime-skipper").addEventListener("change", async (event) => {
   }
 });
 
-$("update").addEventListener("click", async () => {
-  try {
-    await send({ type: "subscription.setUrl", url: $("subscription").value });
-    await send({ type: "subscription.refresh" });
-    showStatus(await send({ type: "status.get" }));
-  } catch (error) {
-    console.error(error);
-  }
-});
-
-$("refresh-page").addEventListener("click", async () => {
-  try {
-    const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-    if (tab && tab.id) {
-      await chrome.tabs.reload(tab.id);
-      window.close();
+// Add event listeners for mini refresh buttons
+document.querySelectorAll('.refresh-btn-mini').forEach(btn => {
+  btn.addEventListener('click', async () => {
+    try {
+      const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+      if (tab && tab.id) {
+        await chrome.tabs.reload(tab.id);
+        window.close();
+      }
+    } catch (error) {
+      console.error("Refresh failed:", error);
     }
-  } catch (error) {
-    $("status").textContent = `Refresh failed: ${error.message}`;
-  }
+  });
 });
 
 init().catch((error) => {
