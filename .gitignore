@@ -1,8 +1,20 @@
-# Node modules
+# Dependencies
 node_modules/
+package-lock.json
+yarn.lock
+
+# Build outputs
+dist/
+build/
+*.log
 
 # OS files
 .DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
 Thumbs.db
 desktop.ini
 
@@ -12,16 +24,29 @@ desktop.ini
 *.swp
 *.swo
 *~
+.project
+.classpath
+.settings/
+*.sublime-workspace
 
-# Build artifacts
-dist/
-build/
+# Environment files
+.env
+.env.local
+.env.*.local
 
 # Temporary files
 *.tmp
 *.temp
-*.log
+*.cache
 
-# Documentation files that are not part of the core code
-adblock_plus_analysis.md
-logo-reference.png
+# Test coverage
+coverage/
+.nyc_output/
+
+# Misc
+*.pid
+*.seed
+*.pid.lock
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

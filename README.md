@@ -1,42 +1,183 @@
-# Clear Ad Plus
+# <img src="icons/logo.svg" alt="Clear Ad Plus" width="40" height="40"> Clear Ad Plus
 
-Clear Ad Plus is an independent, no-build Manifest V3 Chrome extension with powerful ad blocking. Load this directory with **Developer mode → Load unpacked**.
+[![Chrome Web Store](https://img.shields.io/badge/Chrome-Extension-green?logo=google-chrome&logoColor=white)](https://chrome.google.com/webstore)
+[![Version](https://img.shields.io/badge/version-0.1.0-blue.svg)](https://github.com/hrishi025/ClearAdPlus/releases)
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/hrishi025/ClearAdPlus/pulls)
+[![Stars](https://img.shields.io/github/stars/hrishi025/ClearAdPlus?style=social)](https://github.com/hrishi025/ClearAdPlus/stargazers)
+[![Forks](https://img.shields.io/github/forks/hrishi025/ClearAdPlus?style=social)](https://github.com/hrishi025/ClearAdPlus/network/members)
 
-## Implemented filter subset
+> A powerful, lightweight, and privacy-focused ad blocker for Chrome with support for YouTube, JioHotstar, and Amazon Prime Video.
 
-- `||example.com^` hostname blocking rules, with a conservative literal/wildcard URL suffix (for example `||example.com^*/midroll?`).
-- `|https://example.com/path|` exact URL-style blocking rules.
-- `@@` exceptions for either supported form. Exceptions use a higher DNR priority.
-- `$script`, `$image`, `$stylesheet`, `$font`, `$media`, `$xmlhttprequest`, `$subdocument`, `$document`.
-- `$third-party` and `$~third-party`.
-- `$domain=example.com|~excluded.example.com` using DNR initiator-domain restrictions.
-- `example.com##.advertisement` and generic `##.generic-ad` cosmetic rules, plus exact supported-selector exceptions such as `example.com#@#.advertisement`, for conservative element/class/id/attribute selectors.
+## ⭐ Star us on GitHub — it helps!
 
-Unsupported syntax is retained as a diagnostic count rather than compiled incorrectly. This is deliberately not full Adblock Plus compatibility. Regular expressions, redirects, header changes, CSP, scriptlets, wildcards beyond the two documented URL forms, and complex cosmetic selectors are unsupported.
+[![Star](https://img.shields.io/badge/Star%20This%20Repo-ff69b4?style=for-the-badge&logo=github&logoColor=white)](https://github.com/hrishi025/ClearAdPlus)
 
-## Design notes
+## ☕ Buy me a coffee
 
-- A small independent core set is packaged as a Chrome static DNR ruleset. Dynamic DNR rules are used for downloaded lists, user filters, and allowlists; global disable/enable synchronizes both classes of rules.
-- The default subscription URL is EasyList. It refreshes on install/startup when no successful update exists, then every 24 hours. Downloads are parsed in memory and compiled before an atomic dynamic-rule replacement; an unsuccessful update leaves working rules intact.
-- List compilation uses Chrome's `MAX_NUMBER_OF_DYNAMIC_RULES` quota (with a conservative 5,000-rule fallback for older Chromium builds), and is capped at 30,000 by this implementation. When the list exceeds that capacity, rules targeting currently open sites are prioritized before the remaining rules retain list order. The status UI reports a partial import as unsupported/ignored entries; it never claims full EasyList coverage.
-- Global disabling removes this extension's dynamic rules. Re-enabling recompiles the last successfully stored filter text.
-- Allowlisting persists domains. It installs higher-priority DNR allow rules for requests initiated by the site and stops cosmetic injection on that site. A main-frame allow rule is included for the exact allowlisted domain.
-- ClearBlock does not modify, inspect, or disable other extensions by default. The popup can request Chrome's optional `management` permission only after the user clicks **Check for Adblock Plus conflict**. It checks the Adblock Plus ID observed in the supplied CRX and, if that extension is enabled, offers only to pause ClearBlock. Using one blocker at a time is the supported coexistence mode.
+If you find this project helpful, consider buying me a coffee to support continued development.
 
-## Build-time static rulesets
+[![Buy Me A Coffee](https://img.shields.io/badge/Buy%20Me%20A%20Coffee-ffdd00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black)](https://buymeacoffee.com/hrishi025)
 
-For a large, licensed filter list, build a reviewed static DNR ruleset with:
+## ✨ Features
 
-```powershell
-node tools/build-static-ruleset.mjs --input C:\path\to\licensed-list.txt --output rules\licensed-list.json
+### 🛡️ Core Ad Blocking
+- **Network-Level Blocking**: Uses Chrome's Declarative Net Request API for efficient blocking
+- **Cosmetic Filtering**: Hides banner ads and sponsored content
+- **Filter Lists**: Supports EasyList and custom subscription URLs
+- **Automatic Updates**: Filter lists update every 24 hours
+
+### 🎯 Platform-Specific Ad Skipping
+- **YouTube**: Auto-skips video ads with smart detection
+- **JioHotstar/JioCinema**: 16x speed fast-forward, auto-mute, skip button auto-click
+- **Amazon Prime Video**: 8x speed fast-forward, auto-mute, skip button auto-click
+
+### 🎨 Modern UI
+- **Clean Design**: Red-themed interface with Montserrat typography
+- **Statistics**: Real-time blocked request counts
+- **Badge**: Shows blocked count on toolbar icon
+- **Toggle Controls**: Enable/disable features per platform
+- **Refresh Button**: Quick page reload for changes to take effect
+
+### 🔒 Privacy & Performance
+- **Zero Telemetry**: No data collection or analytics
+- **Local Storage**: All data stored locally in Chrome
+- **Minimal Overhead**: Optimized for performance
+- **Manifest V3**: Compliant with Chrome's latest extension standards
+
+## 📸 Screenshots
+
+### Popup Interface
+![Popup](docs/screenshots/popup.png)
+
+## 🚀 Installation
+
+### From Chrome Web Store
+1. Visit the [Chrome Web Store](https://chrome.google.com/webstore)
+2. Click "Add to Chrome"
+3. Follow the installation prompts
+
+### From Source (Developer Mode)
+1. Clone this repository:
+   ```bash
+   git clone https://github.com/hrishi025/ClearAdPlus.git
+   ```
+2. Open Chrome and navigate to `chrome://extensions/`
+3. Enable **Developer mode** (top-right toggle)
+4. Click **Load unpacked** (top-left)
+5. Select the `clearblock` directory
+6. The extension is now loaded!
+
+## 📖 Usage
+
+### Basic Blocking
+- **Global Toggle**: Enable/disable blocking globally from the popup
+- **Per-Site Allowlist**: Skip ad blocking for specific websites
+- **Statistics**: View blocked request counts in the popup
+
+### Platform-Specific Features
+- **YouTube**: Ads are automatically skipped
+- **JioHotstar**: Toggle "JioHotstar ad skipping" in popup
+- **Prime Video**: Toggle "Prime Video ad skipping" in popup
+
+### Filter Management
+- **Custom Subscriptions**: Add custom filter list URLs
+- **Automatic Updates**: Filter lists update every 24 hours
+- **Manual Update**: Click "Update list" in settings
+
+## 🛠️ Development
+
+### Prerequisites
+- Node.js 16+
+- Chrome 127+ (for Manifest V3 support)
+
+### Setup
+```bash
+# Install dependencies
+npm install
+
+# Run tests
+npm test
+
+# Build static ruleset (optional)
+node tools/build-static-ruleset.mjs --input filters.txt --output rules/custom.json
 ```
 
-Then declare the generated file in `manifest.json` under `declarative_net_request.rule_resources`. The helper does not download lists, bundle third-party list content automatically, or execute list content. Review the list license and Chrome static-rule limits before distribution.
+### Project Structure
+```
+clearblock/
+├── src/
+│   ├── background/      # Service worker and DNR logic
+│   ├── content/         # Content scripts for different platforms
+│   ├── popup/           # Popup UI
+│   └── shared/          # Shared utilities
+├── icons/              # Extension icons
+├── rules/              # DNR rules
+├── test/               # Unit tests
+├── tools/              # Build and utility scripts
+├── docs/               # Documentation
+└── manifest.json       # Extension manifest
+```
 
-## Streaming-video limitation
+## 🧪 Testing
 
-ClearBlock blocks separately requested resources that match installed DNR rules. It cannot reliably skip video ads that a streaming provider stitches into the same media stream as program content. For YouTube only, ClearBlock adds an independent, allowlist-aware player fallback: it clicks a visible YouTube Skip control and seeks while the YouTube player explicitly has its `ad-showing` state. It is not a general video-player bypass and may stop working if YouTube changes its player markup/state model. A successful EasyList update increases request/cosmetic coverage but is not a promise that every Hotstar in-stream advertisement will disappear or skip.
+### Manual Testing Checklist
+- [ ] Extension loads without errors
+- [ ] Popup opens correctly
+- [ ] Global blocking toggle works
+- [ ] Per-site allowlist works
+- [ ] YouTube ad skipping works
+- [ ] JioHotstar ad skipping works
+- [ ] Prime Video ad skipping works
+- [ ] Statistics display correctly
+- [ ] Filter updates work
+- [ ] Settings persist across browser restarts
 
-## Test
+### Automated Tests
+```bash
+npm test
+```
 
-Run `npm test` from this directory. These unit tests exercise parsing and DNR compilation only; Chrome API behavior still needs the manual checklist in `TESTING.md`.
+## 🤝 Contributing
+
+We welcome contributions! Please follow these guidelines:
+
+1. **Fork the repository**
+2. **Create a feature branch** (`git checkout -b feature/amazing-feature`)
+3. **Commit your changes** (`git commit -m 'Add amazing feature'`)
+4. **Push to the branch** (`git push origin feature/amazing-feature`)
+5. **Open a Pull Request**
+
+### Development Guidelines
+- Follow the existing code style
+- Add tests for new features
+- Update documentation as needed
+- Ensure all tests pass before submitting
+
+## 📝 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🙏 Acknowledgments
+
+- [Adblock Plus](https://adblockplus.org/) - For filter list format inspiration
+- [kushwantheswar/jiohotstar-ad-blocker](https://github.com/kushwantheswar/jiohotstar-ad-blocker) - JioHotstar ad skipping algorithm
+- [Chrome Extensions Documentation](https://developer.chrome.com/docs/extensions/mv3/) - Chrome API documentation
+
+## 📮 Contact
+
+- **Issues**: [GitHub Issues](https://github.com/hrishi025/ClearAdPlus/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/hrishi025/ClearAdPlus/discussions)
+
+## 🔗 Links
+
+- [Chrome Web Store](https://chrome.google.com/webstore)
+- [Documentation](docs/)
+- [Releases](https://github.com/hrishi025/ClearAdPlus/releases)
+- [Wiki](https://github.com/hrishi025/ClearAdPlus/wiki)
+
+---
+
+<div align="center">
+  <sub>Built with ❤️ by <a href="https://github.com/hrishi025">@hrishi025</a></sub>
+</div>
