@@ -1,0 +1,6 @@
+{
+  "name": "clearblock",
+  "private": true,
+  "type": "module",
+  "scripts": { "test": "node --test test/filter-parser.test.js" }
+}

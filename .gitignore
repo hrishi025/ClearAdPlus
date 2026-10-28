@@ -1,0 +1,27 @@
+# Node modules
+node_modules/
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Build artifacts
+dist/
+build/
+
+# Temporary files
+*.tmp
+*.temp
+*.log
+
+# Documentation files that are not part of the core code
+adblock_plus_analysis.md
+logo-reference.png

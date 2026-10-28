@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <main>
+    <header>
+      <div class="logo-container">
+        <div class="logo-icon">
+          <img src="../../icons/logo.png" alt="Clear Ad Plus Logo" />
+        </div>
+        <div class="logo-text">
+          <h1><span class="name-light">ClearAd</span><span class="name-bold">Plus</span></h1>
+          <span class="version">v0.1.0</span>
+        </div>
+      </div>
+      <div id="health" class="health-indicator" title="Extension status"></div>
+    </header>
+
+    <section class="stats-card">
+      <div class="stat-item">
+        <div class="stat-icon blocked-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M12 8v4M12 16h.01"/>
+          </svg>
+        </div>
+        <div class="stat-content">
+          <span class="stat-label">Blocked on this page</span>
+          <strong id="page-blocked" class="stat-value">0</strong>
+        </div>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <div class="stat-icon total-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+          </svg>
+        </div>
+        <div class="stat-content">
+          <span class="stat-label">Total blocked</span>
+          <strong id="total-blocked" class="stat-value">0</strong>
+        </div>
+      </div>
+    </section>
+
+    <p class="section-label">BLOCKING CONTROLS</p>
+    
+    <section class="control-section">
+      <div class="control-item">
+        <div class="control-info">
+          <strong>Global blocking</strong>
+          <span class="control-subtext">Enable extension-wide blocking</span>
+        </div>
+        <label class="toggle-switch">
+          <input id="global" type="checkbox">
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
+      
+      <div class="control-item">
+        <div class="control-info">
+          <strong>Skip ad blocking for this website</strong>
+          <span id="site" class="control-subtext">Loading...</span>
+        </div>
+        <label class="toggle-switch">
+          <input id="allowlist" type="checkbox" disabled aria-label="Allow this site">
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
+    </section>
+
+    <section id="refresh-section" class="refresh-section">
+      <p class="section-label">REFRESH THIS PAGE</p>
+      <p class="refresh-text">Click the button below for changes to take effect.</p>
+      <button id="refresh-page" class="btn btn-secondary">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M23 4v6h-6M1 20v-6h6"/>
+          <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
+        </svg>
+        Refresh
+      </button>
+    </section>
+
+    <details class="settings-dropdown">
+      <summary>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="3"/>
+          <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+        </svg>
+        Subscription settings
+      </summary>
+      <div class="settings-content">
+        <label for="subscription">Subscription URL</label>
+        <input id="subscription" type="url" aria-label="Subscription URL" placeholder="https://example.com/filters.txt">
+        <button id="update" class="btn btn-secondary">Update list</button>
+        <p id="details" class="muted-text"></p>
+      </div>
+    </details>
+
+    <footer>
+      <div class="footer-content">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"/>
+          <path d="M12 16v-4M12 8h.01"/>
+        </svg>
+        <span>Statistics are based on installed rules. Per-page counts track actual blocked requests in this session.</span>
+      </div>
+    </footer>
+  </main>
+  <script src="popup.js"></script>
+</body>
+</html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Convert SVG to PNG for Clear Ad Plus</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+        }
+        .step {
+            margin: 20px 0;
+            padding: 15px;
+            background: #f9f9f9;
+            border-left: 4px solid #ef4444;
+        }
+        .step h3 {
+            margin-top: 0;
+            color: #ef4444;
+        }
+        canvas {
+            border: 1px solid #ddd;
+            margin: 10px 0;
+            background: white;
+        }
+        button {
+            background: #ef4444;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px 5px;
+        }
+        button:hover {
+            background: #dc2626;
+        }
+        .preview {
+            display: flex;
+            gap: 20px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        .preview-item {
+            text-align: center;
+        }
+        .preview-item canvas {
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎨 Convert SVG to PNG for Clear Ad Plus</h1>
+        
+        <div class="step">
+            <h3>Step 1: Upload your SVG</h3>
+            <input type="file" id="svgInput" accept=".svg">
+        </div>
+
+        <div class="step">
+            <h3>Step 2: Preview converted icons</h3>
+            <div class="preview">
+                <div class="preview-item">
+                    <canvas id="canvas16" width="16" height="16"></canvas>
+                    <p>16x16</p>
+                </div>
+                <div class="preview-item">
+                    <canvas id="canvas48" width="48" height="48"></canvas>
+                    <p>48x48</p>
+                </div>
+                <div class="preview-item">
+                    <canvas id="canvas128" width="128" height="128"></canvas>
+                    <p>128x128</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="step">
+            <h3>Step 3: Download PNG icons</h3>
+            <button onclick="downloadIcon(16)">Download 16x16</button>
+            <button onclick="downloadIcon(48)">Download 48x48</button>
+            <button onclick="downloadIcon(128)">Download 128x128</button>
+        </div>
+
+        <div class="step">
+            <h3>Step 4: Replace icons in extension</h3>
+            <p>Download all three sizes, then replace the files in:</p>
+            <code>C:\Users\user\Documents\Codex\2026-10-27\reverse-engineer-the-adblock-plus-chrome\outputs\clearblock\icons\</code>
+            <p>Replace: icon16.png, icon48.png, icon128.png with your converted versions</p>
+        </div>
+
+        <div class="step">
+            <h3>Step 5: Reload extension</h3>
+            <p>Go to chrome://extensions and reload Clear Ad Plus</p>
+        </div>
+    </div>
+
+    <script>
+        let svgImage = null;
+
+        document.getElementById('svgInput').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                const img = new Image();
+                img.onload = function() {
+                    svgImage = img;
+                    resizeAndDraw();
+                };
+                img.src = event.target.result;
+            };
+            reader.readAsDataURL(file);
+        });
+
+        function resizeAndDraw() {
+            if (!svgImage) return;
+
+            const sizes = [16, 48, 128];
+            sizes.forEach(size => {
+                const canvas = document.getElementById('canvas' + size);
+                const ctx = canvas.getContext('2d');
+                
+                // Clear and resize
+                ctx.clearRect(0, 0, size, size);
+                
+                // Draw resized image
+                ctx.drawImage(svgImage, 0, 0, size, size);
+            });
+        }
+
+        function downloadIcon(size) {
+            if (!svgImage) {
+                alert('Please upload an SVG first');
+                return;
+            }
+
+            const canvas = document.getElementById('canvas' + size);
+            const link = document.createElement('a');
+            link.download = `icon${size}.png`;
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        }
+    </script>
+</body>
+</html>
