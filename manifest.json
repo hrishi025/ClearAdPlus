@@ -35,5 +35,10 @@
     "matches": ["*://*.youtube.com/*", "*://youtube.com/*"],
     "js": ["src/content/youtube-skipper.js"],
     "run_at": "document_start"
+  }, {
+    "matches": ["*://*.hotstar.com/*", "*://*.jiocinema.com/*", "*://*.jiohotstar.com/*"],
+    "js": ["src/content/hotstar-skipper.js"],
+    "css": ["src/content/hotstar-styles.css"],
+    "run_at": "document_start"
   }]
 }

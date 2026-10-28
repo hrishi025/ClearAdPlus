@@ -63,6 +63,17 @@ async function showStatus(settings) {
     $("allowlist").checked = settings.allowlistedDomains.includes(currentDomain);
   }
   
+  // Get Hotstar skipper setting
+  chrome.storage.local.get(['hotstarAdBlockEnabled'], (result) => {
+    if (result && result.hotstarAdBlockEnabled !== undefined) {
+      $("hotstar-skipper").checked = result.hotstarAdBlockEnabled;
+    } else {
+      // Default to enabled
+      $("hotstar-skipper").checked = true;
+      chrome.storage.local.set({ hotstarAdBlockEnabled: true });
+    }
+  });
+  
   // Get actual blocked counts from background
   try {
     const stats = await send({ type: "stats.getBlockedCount" });
@@ -126,6 +137,14 @@ $("global").addEventListener("change", async (event) => {
 $("allowlist").addEventListener("change", async (event) => {
   try {
     showStatus(await send({ type: "allowlist.set", domain: currentDomain, allowlisted: event.target.checked }));
+  } catch (error) {
+    console.error(error);
+  }
+});
+
+$("hotstar-skipper").addEventListener("change", async (event) => {
+  try {
+    chrome.storage.local.set({ hotstarAdBlockEnabled: event.target.checked });
   } catch (error) {
     console.error(error);
   }

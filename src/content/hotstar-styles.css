@@ -1,0 +1,11 @@
+[class*="ad-container"],
+[class*="ad-timer"],
+[class*="ad-badge"],
+[class*="AdOverlay"],
+.video-ad-overlay,
+.player-ad-ui,
+[class*="banner-ad"] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+}
