@@ -40,5 +40,9 @@
     "js": ["src/content/hotstar-skipper.js"],
     "css": ["src/content/hotstar-styles.css"],
     "run_at": "document_start"
+  }, {
+    "matches": ["*://*.primevideo.com/*", "*://*.amazon.com/*", "*://*.amazon.co.uk/*", "*://*.amazon.de/*", "*://*.amazon.co.jp/*"],
+    "js": ["src/content/prime-skipper.js"],
+    "run_at": "document_start"
   }]
 }

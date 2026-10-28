@@ -74,6 +74,17 @@ async function showStatus(settings) {
     }
   });
   
+  // Get Prime Video skipper setting
+  chrome.storage.local.get(['primeAdBlockEnabled'], (result) => {
+    if (result && result.primeAdBlockEnabled !== undefined) {
+      $("prime-skipper").checked = result.primeAdBlockEnabled;
+    } else {
+      // Default to enabled
+      $("prime-skipper").checked = true;
+      chrome.storage.local.set({ primeAdBlockEnabled: true });
+    }
+  });
+  
   // Get actual blocked counts from background
   try {
     const stats = await send({ type: "stats.getBlockedCount" });
@@ -145,6 +156,14 @@ $("allowlist").addEventListener("change", async (event) => {
 $("hotstar-skipper").addEventListener("change", async (event) => {
   try {
     chrome.storage.local.set({ hotstarAdBlockEnabled: event.target.checked });
+  } catch (error) {
+    console.error(error);
+  }
+});
+
+$("prime-skipper").addEventListener("change", async (event) => {
+  try {
+    chrome.storage.local.set({ primeAdBlockEnabled: event.target.checked });
   } catch (error) {
     console.error(error);
   }
