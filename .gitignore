@@ -54,3 +54,7 @@ yarn-error.log*
 # Extension keys (keep private)
 *.pem
 key.pem
+
+# Metadata and build artifacts
+_metadata/
+releases/
